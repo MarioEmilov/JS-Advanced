@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #ccc;
+    font-family: sans-serif;
+}
+footer {
+    
+    background: #234465;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+}
+
+nav {
+    background: #234465;
+}
+
+nav ul {
+    text-align: center;
+    margin: 0;
+    padding: 30px;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20 px;
+    border-radius: 5px;
+}
+
+section {
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+header>p {
+    font-style: italic;
+}
+
+article p {
+    font-size: 24px;
+}
