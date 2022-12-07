@@ -1,0 +1,92 @@
+window.addEventListener('load', solve);
+
+function solve() {
+    let form = document.querySelector('form');
+    let nextBtn = document.getElementById('next-btn');
+    let reservation = document.querySelector('.info-list');
+    let confirm = document.querySelector('.confirm-list');
+
+    nextBtn.addEventListener('click', next);
+
+    function next(event) {
+        event.preventDefault();
+
+        let firstName = document.getElementById('first-name');
+        let lastName = document.getElementById('last-name');
+        let dateIn = document.getElementById('date-in');
+        let dateOut = document.getElementById('date-out');
+        let guests = document.getElementById('people-count');
+
+        let firstNameValue = firstName.value;
+        let lastNameValue = lastName.value;
+        let dateInValue = dateIn.value;
+        let dateOutValue = dateOut.value;
+        let guestsValue = guests.value;
+
+        let dateInSplit = dateInValue.split('-');
+        let dateInSum = (dateInSplit[0] * 365) + (dateInSplit[1] * 30) + ((dateInSplit[2]))
+        let dateOutSplit = dateOutValue.split('-');
+        let dateOutSum = (dateOutSplit[0] * 365) + (dateOutSplit[1] * 30) + ((dateOutSplit[2]))
+
+        if (!firstNameValue || !lastNameValue || !dateInValue || !dateOutValue || !guestsValue || (dateOutSum - dateInSum) <= 0 || Number(guestsValue) < 1) {
+            return
+        }
+        nextBtn.disabled = true;
+        form.reset();
+
+        let li = document.createElement('li');
+        li.classList.add('reservation-content');
+        li.innerHTML = `<article>
+                    <h3>Name: ${firstNameValue} ${lastNameValue}</h3>
+                    <p>From date: ${dateInValue}</p>
+                    <p>To date: ${dateOutValue}</p>
+                    <p>For ${guestsValue} people</p>
+                </article>
+                <button class="edit-btn">Edit</button>
+                <button class="continue-btn">Continue</button>`;
+        reservation.appendChild(li);
+
+        let editBtn = document.querySelector('.edit-btn');
+        editBtn.addEventListener('click', () => {
+            nextBtn.disabled = false;
+
+            firstName.value = firstNameValue;
+            lastName.value = lastNameValue;
+            dateIn.value = dateInValue;
+            dateOut.value = dateOutValue;
+            guests.value = guestsValue;
+            li.remove();
+        });
+
+        let continueBtn = document.querySelector('.continue-btn');
+        continueBtn.addEventListener('click', () => {
+            li.innerHTML = `<article>
+                    <h3>Name: ${firstNameValue} ${lastNameValue}</h3>
+                    <p>From date: ${dateInValue}</p>
+                    <p>To date: ${dateOutValue}</p>
+                    <p>For ${guestsValue} people</p>
+                </article>
+                <button class="confirm-btn">Confirm</button>
+                <button class="cancel-btn">Cancel</button>`;
+            confirm.appendChild(li);
+
+            let confirmBtn = document.querySelector('.confirm-btn');
+            confirmBtn.addEventListener('click', () => {
+                li.remove();
+                nextBtn.disabled = false;
+                let verification = document.getElementById('verification');
+                verification.classList.add('reservation-confirmed');
+                verification.textContent = 'Confirmed.'
+            })
+
+            let cancelBtn = document.querySelector('.cancel-btn');
+            cancelBtn.addEventListener('click', () => {
+                li.remove();
+                nextBtn.disabled = false;
+                let verification = document.getElementById('verification');
+                verification.classList.add('reservation-cancelled');
+                verification.textContent = 'Cancelled.'
+            })
+        });
+    }
+}
