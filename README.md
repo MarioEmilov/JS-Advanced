@@ -106,3 +106,6 @@ ________________________________________________________________
 After that I received this Certificate:
 --------------------------------------------------
 
+![JS Advanced - September 2022 - Certificate](https://user-images.githubusercontent.com/88974458/206205307-57ef93db-7fb4-40df-bca4-2a6cc943748e.jpeg)
+
+
